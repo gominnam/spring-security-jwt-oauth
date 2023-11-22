@@ -2,15 +2,11 @@ package com.example.springsecurityjwtoauth.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod.POST
 import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler
@@ -29,10 +25,12 @@ class SecurityConfig(
         .csrf { it.disable() } //csrf 비활성화
         .authorizeHttpRequests {
             it
-                .requestMatchers(AntPathRequestMatcher("/auth/**")).permitAll() // `/auth/**` 요청 인증 없이 허용
+                .requestMatchers(AntPathRequestMatcher("/auth/**"),
+                    AntPathRequestMatcher("/h2-console/**")).permitAll() // `/auth/**` 요청 인증 없이 허용
 //                .requestMatchers(AntPathRequestMatcher("/api/**")).hasRole(Role.USER.name())
                 .anyRequest().authenticated() // 그 외 요청은 인증 필요
         }
+        .headers { it.frameOptions { frameOptions -> frameOptions.sameOrigin() } } // h2-console 사용을 위한 설정
         .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) } // 서버에서 세션 상태 저장 안함(STATELESS)
         .authenticationProvider(authenticationProvider) // authenticationProvider를 사용하여 사용자의 인증 정보를 제공(Customizing 한 설정)
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java) // jwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 앞에 filter 순서
