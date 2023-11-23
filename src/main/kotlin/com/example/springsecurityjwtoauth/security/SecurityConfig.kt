@@ -26,7 +26,7 @@ class SecurityConfig(
         .authorizeHttpRequests {
             it
                 .requestMatchers(AntPathRequestMatcher("/auth/**"),
-                    AntPathRequestMatcher("/h2-console/**")).permitAll() // `/auth/**` 요청 인증 없이 허용
+                    AntPathRequestMatcher("/h2-console/**")).permitAll() // 요청 인증 없이 허용
 //                .requestMatchers(AntPathRequestMatcher("/api/**")).hasRole(Role.USER.name())
                 .anyRequest().authenticated() // 그 외 요청은 인증 필요
         }

@@ -21,5 +21,4 @@ class AuthenticationController(
     @PostMapping("/authenticate")
     fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest) =
         userService.authenticate(authenticationRequest)
-
 }

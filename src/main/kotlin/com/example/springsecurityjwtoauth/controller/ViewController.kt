@@ -9,5 +9,6 @@ import org.springframework.web.bind.annotation.RestController
 class ViewController {
     @ResponseStatus(OK)
     @GetMapping("/home")
-    fun greet(): String = "Hello, welcome to secured endpoint."
+    fun greet(): String = "Welcome to secured endpoint!"
+
 }
