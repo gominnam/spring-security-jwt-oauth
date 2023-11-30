@@ -1,14 +1,22 @@
 package com.example.springsecurityjwtoauth.controller
 
-import org.springframework.http.HttpStatus.OK
+import org.springframework.security.authentication.AnonymousAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
 
-@RestController
+
+@Controller
+@RequestMapping("/view")
 class ViewController {
-    @ResponseStatus(OK)
-    @GetMapping("/home")
-    fun greet(): String = "Welcome to secured endpoint!"
+    @GetMapping("/service")
+    fun redirect(): String {
+        val authentication = SecurityContextHolder.getContext().authentication
+        return if (authentication.isAuthenticated) "/service"
+        else "/index"
+    }
 
+    @GetMapping("/home")
+    fun home(): String = "/index"
 }

@@ -33,7 +33,7 @@ class JwtAuthenticationFilter(
             return
         }
 
-        val lengthOfBearerWithSpace = 7
+        val lengthOfBearerWithSpace = 7 //"Brearer " 길이
         val jwtToken = authHeader.substring(lengthOfBearerWithSpace)
 
         val username = jwtService.extractUsername(jwtToken)
