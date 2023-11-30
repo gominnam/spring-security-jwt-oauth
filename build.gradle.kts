@@ -33,7 +33,7 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
     /*SECURITY - OAUTH2*/
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client:2.6.2")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-clien")
 
     /*DATABASE*/
     runtimeOnly("com.h2database:h2")
