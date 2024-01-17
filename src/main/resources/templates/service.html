@@ -7,6 +7,7 @@
     <title>Token Display</title>
 </head>
 <body>
+  <button id="mainButton">메인 화면으로 이동</button>
   <div id="content">
       <p id="tokenMessage"></p>
   </div>
@@ -15,6 +16,11 @@
       window.onload = function () {
           checkToken();
       };
+
+      const mainButton = document.getElementById('mainButton');
+      mainButton.addEventListener('click', function() {
+          window.location.href = '/api/view/home';
+      });
 
       function getAuthToken() {
           return localStorage.getItem('accessToken');

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../constants/constant.js"></script>
     <title>JWT 로그인 및 회원가입 예제</title>
 </head>
 <body>
 <h1>JWT 로그인 및 회원가입</h1>
-
+<button id="mainButton">메인 화면으로 이동</button>
 <!-- 로그인 폼 -->
 <form id="loginForm">
     <label for="loginUsername">사용자명:</label>
@@ -17,7 +18,7 @@
     <input type="password" id="loginPassword" name="loginPassword" required><br>
     <button type="button" onclick="login()">로그인</button>
     <button type="button" onclick="showSignupForm()">회원가입</button>
-    <button type="button" onclick="showOauth2Form()">소셜로그인</button>
+    <button type="button" onclick="getViewOauth2()">소셜로그인</button>
 </form>
 
 <!-- 회원가입 폼 -->
@@ -34,12 +35,6 @@
     </form>
 </div>
 
-<div id="oauthLogInForm" style="display:none">
-    <h2>소셜 로그인</h2>
-    <button type="button" onclick="googleLogIn()">구글 로그인</button>
-    <button type="button" onclick="naverLogIn()">네이버 로그인</button>
-</div>
-
 <!-- 토큰 표시 -->
 <div id="tokenDisplay" style="display:none">
     <h2>받아온 JWT 토큰</h2>
@@ -47,11 +42,15 @@
 </div>
 
 <script>
+    const mainButton = document.getElementById('mainButton');
+    mainButton.addEventListener('click', function() {
+        window.location.href = '/api/view/home';
+    });
+
     async function login() {
         // 토큰을 표시하고, 로그인 폼을 감춤
         document.getElementById("loginForm").style.display = "none";
         document.getElementById("tokenDisplay").style.display = "block";
-        document.getElementById("oauthLogInForm").style.display = "none";
 
         const username = document.getElementById("loginUsername").value;
         const password = document.getElementById("loginPassword").value;
@@ -112,7 +111,6 @@
         // 회원가입 폼 표시
         document.getElementById("loginForm").style.display = "none";
         document.getElementById("signupForm").style.display = "block";
-        document.getElementById("oauthLogInForm").style.display = "none";
     }
 
     async function register() {
@@ -157,11 +155,8 @@
         return false;
     }
 
-    function showOauth2Form() {
-        // 소셜 로그인 폼 표시
-        document.getElementById("oauthLogInForm").style.display = "block";
-        document.getElementById("loginForm").style.display = "none";
-        document.getElementById("signupForm").style.display = "none";
+    function getViewOauth2() {
+        window.location.href = '/api/view/oauth2';
     }
 
     function validateEmail(email) {

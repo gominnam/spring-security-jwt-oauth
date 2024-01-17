@@ -62,3 +62,4 @@ localhost:8080/api/user
 - https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html
 - https://github.com/CristianSur/kotlin-jwt-spring-security-6/
 - https://www.baeldung.com/spring-redirect-after-login
+- https://spring.io/guides/tutorials/spring-boot-oauth2/

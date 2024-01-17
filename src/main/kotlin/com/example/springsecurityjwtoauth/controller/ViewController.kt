@@ -19,4 +19,7 @@ class ViewController {
 
     @GetMapping("/home")
     fun home(): String = "/index"
+
+    @GetMapping("/oauth2")
+    fun oauth2(): String = "/oauth2"
 }

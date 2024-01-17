@@ -21,15 +21,13 @@ class UserService(
 ) {
     fun register(registerRequest: RegisterRequest): AuthenticationResponse {
 
-        if (userRepository.findByUsernameOrEmail(registerRequest.username, registerRequest.email) != null) {
+        if (userRepository.findByNameOrEmail(registerRequest.name, registerRequest.email) != null) {
             throw RegisteredException()
         }
 
-        val user = UserEntity(
-            email = registerRequest.email,
-            username = registerRequest.username,
-            password = passwordEncoder.encode(registerRequest.password)
-        )
+        val user = UserEntity.Builder().email(registerRequest.email).name(registerRequest.name).password(
+            passwordEncoder.encode(registerRequest.password)
+        ).build()
 
         userRepository.save(user)
 
@@ -47,7 +45,7 @@ class UserService(
             )
         )
 
-        val user = userRepository.findByUsername(authenticationRequest.username)
+        val user = userRepository.findByName(authenticationRequest.username)
 
         return AuthenticationResponse(jwtService.generateToken(user!!))
     }

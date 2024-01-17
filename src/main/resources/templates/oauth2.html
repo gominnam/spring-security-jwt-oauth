@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Login Oauth2!</title>
+<!--    <script src="https://apis.google.com/js/platform.js" async defer></script>-->
+</head>
+<body>
+
+<div id="oauthLogInForm">
+    <h2>소셜 로그인</h2>
+        <a href="/login/oauth2/code/google">구글 로그인</a> <!-- ?redirect_uri=http://localhost:3000/oauth2/redirect -->
+    <button type="button" onclick="naverLogIn()">네이버 로그인</button>
+</div>
+
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+    }
+</script>
+</body>
+</html>

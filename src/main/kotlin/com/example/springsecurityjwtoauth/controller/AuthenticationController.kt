@@ -3,6 +3,7 @@ package com.example.springsecurityjwtoauth.controller
 import com.example.springsecurityjwtoauth.model.authentication.AuthenticationRequest
 import com.example.springsecurityjwtoauth.model.authentication.AuthenticationResponse
 import com.example.springsecurityjwtoauth.model.authentication.RegisterRequest
+import com.example.springsecurityjwtoauth.security.oauth2.user.CustomOAuth2UserService
 import com.example.springsecurityjwtoauth.service.UserService
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -35,5 +36,4 @@ class AuthenticationController(
             .headers(headers)
             .build()
     }
-
 }
